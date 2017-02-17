@@ -1,23 +1,37 @@
 const async = require('async');
 
-const Thread = require('../../models/thread.js');
+const Post = require('../../models/post.js');
 const Comments = require('../../models/comment.js');
 
 let controller = {};
 
 controller.index = (req, res) => {
-  Thread
-  .findAll()
-  .then((data) => {
-    res.render('forum_app/index.ejs', {
-      threads: data
-    });
-  })
-  .catch((err) => {
-    res
-    .status(400)
-    .send(err);
-  });
+  // Post
+  // .findAll()
+  // .then((data) => {
+  //   res.render('forum_app/index.ejs', {
+  //     posts: data
+  //   });
+  // })
+  // .catch((err) => {
+  //   res
+  //   .status(400)
+  //   .send(err);
+  // });
+    Post
+    .findAll()
+    .then((data) => {
+      console.log(data);
+      Post
+      .sumComments(data)
+      .then((comments) => {
+        console.log(comments);
+        res.render('forum_app/index.ejs', {
+          posts: data,
+          totalSum: comments
+        })
+      });
+    })
 }
 
 controller.new = (req, res) => {
@@ -43,30 +57,30 @@ controller.show = (req, res) => {
   //   .send(err);
   // });
 
-  let thread_data;
+  let post_data;
   let comment_data;
 
-  const getThreads = (cb) => {
-    Thread
-    .findThreadById(req.params.id)
-    .then((threads) => {
-      thread_data = threads;
+  const getPost = (cb) => {
+    Post
+    .findPostById(req.params.id)
+    .then((data) => {
+      post_data = data;
       cb();
     });
   }
 
   const getComments = (cb) => {
     Comments
-    .findAllByThreadId(req.params.id)
-    .then((comments) => {
-      comment_data = comments;
+    .findAllByPostId(req.params.id)
+    .then((data) => {
+      comment_data = data;
       cb();
     });
   }
 
-  async.parallel([getThreads, getComments], () => {
+  async.parallel([getPost, getComments], () => {
     res.render('forum_app/show.ejs', {
-      thread: thread_data[0],
+      post: post_data[0],
       comments: comment_data
     });
   });
@@ -74,8 +88,8 @@ controller.show = (req, res) => {
 
 controller.create = (req, res) => {
   console.log(req.body)
-  Thread
-  .createThread(req.body.threads)
+  Post
+  .createPost(req.body.posts)
   .then((data) => {
     res.redirect(`/all`);
   })

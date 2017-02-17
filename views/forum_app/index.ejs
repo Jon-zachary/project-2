@@ -3,22 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>Project 2</title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,400i,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <div id="container">
       <header id="header-container">
-        <h1>Forums Title Goes Here</h1>
-        <button id="standard-btn">Create New Thread</button>
+        <span>
+          <h1>Forums Title Goes Here</h1>
+        </span>
+        <a href="/all/new">
+          <button class="standard-btn">Create New Thread</button>
+        </a>
       </header>
       <section>
-        <% threads.forEach((thread) => { %>
-        <div id="thread-container">
-          <h1><%= thread.title %></h1>
-          <span>Comments: </span>
-          <span>Likes: <%= thread.votes %></span>
-        </div>
+        <% posts.forEach((post) => { %>
+          <div id="post-container">
+            <a href="/all/<%= post.id %>">
+              <h2><%= post.title %></h2>
+            </a>
+            <div id="post-container-icons">
+              <span>Comments: <%= totalSum %></span>
+              <span>Likes: <%= post.votes %></span>
+            </div>
+          </div>
         <% }) %>
       </section>
     </div>

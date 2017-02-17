@@ -1,4 +1,4 @@
-CREATE TABLE threads (
+CREATE TABLE posts (
   id BIGSERIAL PRIMARY KEY,
   votes INTEGER DEFAULT 0,
   title VARCHAR(255),
@@ -9,6 +9,6 @@ CREATE TABLE comments (
   id BIGSERIAL PRIMARY KEY,
   votes INTEGER DEFAULT 0,
   username VARCHAR(255) DEFAULT 'anonymous',
-  comment TEXT,
-  thread_id BIGSERIAL REFERENCES threads(id)
+  content TEXT,
+  post_id INTEGER REFERENCES posts(id)
 );

@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,400i,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
   </head>
@@ -13,10 +14,10 @@
       </header>
       <section>
         <form action="/all" method="POST">
-          <label for="threads[title]">Thread Title</label>
-          <input type="text" name="threads[title]">
-          <label for="threads[content]">Thread Content</label>
-          <textarea name="threads[content]" rows="8" cols="80" placeholder="Enter some text..."></textarea>
+          <label for="posts[title]">Post Title</label><br>
+          <input type="text" name="posts[title]"><br>
+          <label for="posts[content]">Post Content</label><br>
+          <textarea name="posts[content]" rows="8" cols="80" placeholder="Enter some text..."></textarea><br>
           <input type="submit" value="Create Thread">
         </form>
       </section>

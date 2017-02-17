@@ -2,25 +2,38 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title></title>
+    <title><%= post.title %></title>
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,400i,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
   </head>
   <body>
     <div id="container">
       <header>
-        <h1><%= thread.title %></h1>
-        <p><%= thread.content %></p>
+        <a href="/all">
+          <button class="standard-btn">Back to Homepage</button>
+        </a>
+        <h1><%= post.title %></h1>
+        <p><%= post.content %></p>
       </header>
+        <hr>
       <section>
-        <form action="/all/<%= thread.id %>" method="POST">
-          <textarea name="comments[comment]" rows="8" cols="80"></textarea>
-          <input type="submit" value="Reply">
+        <form action="/all/<%= post.id %>" method="POST">
+          <textarea name="comments[content]" rows="6" cols="60"></textarea><br>
+          <button class="standard-btn" type="submit">Submit Comment</button>
         </form>
+
+        <hr>
+
         <% comments.forEach((comment) => { %>
         <div id="comment-container">
-          <p><%= comment.comment %></p>
-          <p><%= comment.username %></p>
+          <span id="comment-content">
+            <p><%= comment.content %></p>
+            <p id="username-tag">by — <strong><%= comment.username %></strong></p>
+          </span>
+          <span id="comment-container-icons">
+            <p>Likes <%= comment.votes %></p>
+          </span>
         </div>
         <% }) %>
       </section>

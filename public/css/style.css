@@ -1,5 +1,10 @@
+* {
+  font-family: 'Lato', sans-serif;
+}
+
 #container {
   max-width: 1280px;
+  width: 90%;
   margin: 0 auto;
 }
 
@@ -8,6 +13,38 @@
   align-items: center;
 }
 
-#thread-container {
+#header-container span {
+  flex: 2;
+}
+
+#post-container {
   display: flex;
+  position: relative;
+}
+
+
+#post-container-icons {
+  align-self: flex-end;
+  position: absolute;
+  right: 0;
+}
+
+#comment-container {
+  background-color: #F1F1F1;
+  margin: 10px 0;
+  padding: 15px 25px;
+  display: flex;
+  position: relative;
+}
+
+#comment-container-icons {
+  display: flex;
+  align-self: flex-end;
+  position: absolute;
+  right: 0;
+  padding-right: 25px;
+}
+
+#username-tag {
+  opacity: .65;
 }
