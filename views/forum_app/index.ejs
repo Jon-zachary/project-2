@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Project 2</title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div id="container">
+      <header id="header-container">
+        <h1>Forums Title Goes Here</h1>
+        <button id="standard-btn">Create New Thread</button>
+      </header>
+      <section>
+        <% threads.forEach((thread) => { %>
+        <div id="thread-container">
+          <h1><%= thread.title %></h1>
+          <span>Comments: </span>
+          <span>Likes: <%= thread.votes %></span>
+        </div>
+        <% }) %>
+      </section>
+    </div>
+  </body>
+</html>

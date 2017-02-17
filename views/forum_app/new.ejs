@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/style.css">
+  </head>
+  <body>
+    <div id="container">
+      <header>
+        <h1>Create a new thread</h1>
+      </header>
+      <section>
+        <form action="/all" method="POST">
+          <label for="threads[title]">Thread Title</label>
+          <input type="text" name="threads[title]">
+          <label for="threads[content]">Thread Content</label>
+          <textarea name="threads[content]" rows="8" cols="80" placeholder="Enter some text..."></textarea>
+          <input type="submit" value="Create Thread">
+        </form>
+      </section>
+    </div>
+  </body>
+</html>
