@@ -24,8 +24,11 @@
               <h2><%= post.title %></h2>
             </a>
             <div id="post-container-icons">
-              <span>Comments: <%= totalSum %></span>
-              <span>Likes: <%= post.votes %></span>
+              <span>Comments: <%= post.comments_num %></span>
+              <form action="/all/<%= post.id %>/post-votes?_method=PUT" method="POST">
+                <!-- <input type="submit" value="Like"> -->
+                <span><button class="like-btn" type="submit"></button><%= post.votes %></span>
+              </form>
             </div>
           </div>
         <% }) %>

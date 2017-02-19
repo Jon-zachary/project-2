@@ -16,4 +16,8 @@ Comments.createComment = (data, id) => {
   );
 }
 
+Comments.votes = (id) => {
+  return database.query('UPDATE comments SET votes = votes + 1 WHERE id = $1', [id]);
+}
+
 module.exports = Comments;

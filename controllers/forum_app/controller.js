@@ -6,32 +6,18 @@ const Comments = require('../../models/comment.js');
 let controller = {};
 
 controller.index = (req, res) => {
-  // Post
-  // .findAll()
-  // .then((data) => {
-  //   res.render('forum_app/index.ejs', {
-  //     posts: data
-  //   });
-  // })
-  // .catch((err) => {
-  //   res
-  //   .status(400)
-  //   .send(err);
-  // });
-    Post
-    .findAll()
-    .then((data) => {
-      console.log(data);
-      Post
-      .sumComments(data)
-      .then((comments) => {
-        console.log(comments);
-        res.render('forum_app/index.ejs', {
-          posts: data,
-          totalSum: comments
-        })
-      });
-    })
+  Post
+  .findAll()
+  .then((data) => {
+    res.render('forum_app/index.ejs', {
+      posts: data
+    });
+  })
+  .catch((err) => {
+    res
+    .status(400)
+    .send(err);
+  });
 }
 
 controller.new = (req, res) => {
@@ -62,7 +48,7 @@ controller.show = (req, res) => {
 
   const getPost = (cb) => {
     Post
-    .findPostById(req.params.id)
+    .findPostById(req.params.post_id)
     .then((data) => {
       post_data = data;
       cb();
@@ -71,7 +57,7 @@ controller.show = (req, res) => {
 
   const getComments = (cb) => {
     Comments
-    .findAllByPostId(req.params.id)
+    .findAllByPostId(req.params.post_id)
     .then((data) => {
       comment_data = data;
       cb();
@@ -87,19 +73,37 @@ controller.show = (req, res) => {
 }
 
 controller.create = (req, res) => {
-  console.log(req.body)
   Post
   .createPost(req.body.posts)
   .then((data) => {
+    console.log(req.body.posts.id)
+    res.redirect(`/all`);
+  })
+}
+
+controller.postVotes = (req, res) => {
+  Post
+  .votes(req.params.post_id)
+  .then(() => {
     res.redirect(`/all`);
   })
 }
 
 controller.createComment = (req, res) => {
   Comments
-  .createComment(req.body.comments, req.params.id)
+  .createComment(req.body.comments, req.params.post_id)
   .then(() => {
-    res.redirect(`/all/${req.params.id}`);
+    res.redirect(`/all/${req.params.post_id}`);
+  })
+  Post
+  .sumComments(req.params.post_id);
+}
+
+controller.commentVotes = (req, res) => {
+  Comments
+  .votes(req.params.cmmnt_id)
+  .then(() => {
+    res.redirect(`/all/${req.params.post_id}`);
   })
 }
 

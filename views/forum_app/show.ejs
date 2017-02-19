@@ -32,6 +32,9 @@
             <p id="username-tag">by — <strong><%= comment.username %></strong></p>
           </span>
           <span id="comment-container-icons">
+            <form action="/all/<%= post.id %>/<%= comment.id %>?_method=PUT" method="POST">
+                <button type="submit">Like</button>
+            </form>
             <p>Likes <%= comment.votes %></p>
           </span>
         </div>

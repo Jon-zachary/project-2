@@ -2,7 +2,8 @@ CREATE TABLE posts (
   id BIGSERIAL PRIMARY KEY,
   votes INTEGER DEFAULT 0,
   title VARCHAR(255),
-  content TEXT
+  content TEXT,
+  comments_num INTEGER DEFAULT 0
 );
 
 CREATE TABLE comments (

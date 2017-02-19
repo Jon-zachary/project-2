@@ -21,7 +21,14 @@ Post.createPost = (data) => {
 }
 
 Post.sumComments = (id) => {
-  return database.query('SELECT COUNT(content) FROM comments WHERE post_id = $1', [id]);
+  return database.query('UPDATE posts SET comments_num = comments_num + 1 WHERE id = $1', [id]);
+}
+
+Post.votes = (id) => {
+  return database.query('UPDATE posts SET votes = votes + 1 WHERE id = $1', [id]);
 }
 
 module.exports = Post;
+
+
+//ORDER BY comments DESC, likes DESC
