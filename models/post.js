@@ -1,4 +1,16 @@
 const database = require('../config/database.js');
+const marked = require('marked');
+
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
 
 let Post = {};
 
@@ -16,7 +28,7 @@ Post.createPost = (data) => {
     (title, content)
     VALUES
     ($1, $2)`,
-    [data.title, data.content]
+    [data.title, marked(data.content)]
   );
 }
 

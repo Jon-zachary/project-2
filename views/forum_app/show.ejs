@@ -35,7 +35,7 @@
       </a>
       <header id="single-post-header">
         <h1><%= post.title %></h1>
-        <p class="post-desc"><%= post.content %></p>
+        <p class="post-desc"><%- post.content %></p>
       </header>
       <button class="standard-btn" id="post-reply">Reply to Post</button>
       <section style="margin-top: 35px;">
@@ -43,7 +43,7 @@
           <div style="display: flex; flex-direction: column;">
             <div id="comment-container">
               <span id="comment-content">
-                <p><%= comment.content %></p>
+                <p><%- comment.content %></p>
               </span>
               <div id="comment-meta">
                 <p id="username-tag">by — <strong><%= comment.username %></strong></p>
@@ -70,7 +70,7 @@
               <% if(reply.reply_content !== null) { %>
                 <div id="comment-reply-container">
                   <span style="max-width: 750px;">
-                    <p><%= reply.reply_content %></p>
+                    <p><%- reply.reply_content %></p>
                   </span>
                   <span id="reply-container-icons">
                     <p id="username-tag">by — <strong><%= reply.reply_username %></strong></p>

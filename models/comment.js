@@ -1,4 +1,16 @@
 const database = require('../config/database.js');
+const marked = require('marked');
+
+marked.setOptions({
+  renderer: new marked.Renderer(),
+  gfm: true,
+  tables: true,
+  breaks: false,
+  pedantic: false,
+  sanitize: true,
+  smartLists: true,
+  smartypants: false
+});
 
 let Comments = {};
 
@@ -29,7 +41,7 @@ Comments.createComment = (data, id) => {
     (content, post_id)
     VALUES
     ($1, $2)`,
-    [data.content, id]
+    [marked(data.content), id]
   );
 }
 
@@ -43,13 +55,9 @@ Comments.addReply = (data, id) => {
     (reply_content, comment_id)
     VALUES
     ($1, $2)`,
-    [data.reply_content, id]
+    [marked(data.reply_content), id]
   );
 }
-
-// Comments.commentReplies = (id) => {
-//   return database.query('SELECT * FROM comment_replies WHERE comment_id = $1', [id]);
-// }
 
 Comments.replyVotes = (id) => {
   return database.query('UPDATE comment_replies SET reply_votes = reply_votes + 1 WHERE reply_id = $1', [id]);
