@@ -30,6 +30,8 @@ npm Modules
 •  Used to set up public folder for static files
 8. **Pg-Promise**  
 • Used to read SQL queries on Node
+9. **Method Override**
+• Used for PUT and DELETE requests
 
 Download Project & Install
 ----------------
@@ -38,4 +40,3 @@ Download Project & Install
 3. On your terminal, run psql -d project_2_db -f migrations/migrations.sql
 4. If you haven't already, install nodemon package (npm install -g nodemon)
 5. Run nodemon, app should be available on localhost:3000
-
