@@ -1,6 +1,5 @@
 const database = require('../config/database.js');
 const marked = require('marked');
-
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -14,6 +13,8 @@ marked.setOptions({
 
 let Comments = {};
 
+// SQL Query that find all comments by post id
+// Also creates a json object within a json array with all replies per comment id
 Comments.findAllByPostId = (id) => {
   return database.query(
     `SELECT
@@ -64,3 +65,8 @@ Comments.replyVotes = (id) => {
 }
 
 module.exports = Comments;
+
+// For the Comments.findAllByPostId logic, I references the links below
+// http://stackoverflow.com/questions/34163209/postgres-aggregate-two-columns-into-one-item
+// https://www.postgresql.org/docs/9.5/static/functions-aggregate.html
+// https://www.postgresql.org/docs/9.4/static/functions-json.html

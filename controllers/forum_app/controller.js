@@ -5,6 +5,7 @@ const Comments = require('../../models/comment.js');
 
 let controller = {};
 
+// Find all posts
 controller.index = (req, res) => {
   Post
   .findAll()
@@ -20,10 +21,7 @@ controller.index = (req, res) => {
   });
 }
 
-controller.new = (req, res) => {
-  res.render('forum_app/new.ejs');
-}
-
+// Show post title, post content, comments and comment replies
 controller.show = (req, res) => {
   let post_data;
   let comment_data;
@@ -55,6 +53,7 @@ controller.show = (req, res) => {
   });
 }
 
+// Create a new post
 controller.create = (req, res) => {
   Post
   .createPost(req.body.posts)
@@ -63,6 +62,7 @@ controller.create = (req, res) => {
   })
 }
 
+// Vote on a post by post id
 controller.postVotes = (req, res) => {
   Post
   .votes(req.params.post_id)
@@ -71,6 +71,7 @@ controller.postVotes = (req, res) => {
   })
 }
 
+// Create a new comment per specific post id
 controller.createComment = (req, res) => {
   Comments
   .createComment(req.body.comments, req.params.post_id)
@@ -81,6 +82,7 @@ controller.createComment = (req, res) => {
   .sumComments(req.params.post_id);
 }
 
+// Vote on comments per comment id
 controller.commentVotes = (req, res) => {
   Comments
   .commentVotes(req.params.cmmnt_id)
@@ -89,6 +91,7 @@ controller.commentVotes = (req, res) => {
   })
 }
 
+// Create a reply per comment  id
 controller.createReply = (req, res) => {
   Comments
   .addReply(req.body.replies, req.params.cmmnt_id)
@@ -97,6 +100,7 @@ controller.createReply = (req, res) => {
   });
 }
 
+// Vote on reply per reply_id id
 controller.replyVotes = (req, res) => {
   Comments
   .replyVotes(req.params.reply_id)

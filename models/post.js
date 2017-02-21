@@ -1,6 +1,5 @@
 const database = require('../config/database.js');
 const marked = require('marked');
-
 marked.setOptions({
   renderer: new marked.Renderer(),
   gfm: true,
@@ -41,6 +40,3 @@ Post.votes = (id) => {
 }
 
 module.exports = Post;
-
-
-//ORDER BY comments DESC, likes DESC
