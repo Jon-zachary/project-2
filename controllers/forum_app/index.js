@@ -2,7 +2,6 @@ const router = require('express').Router();
 const controller = require('./controller.js');
 
 router.get('/', controller.index);
-router.get('/new', controller.new);
 router.get('/:post_id/', controller.show);
 
 router.post('/', controller.create);
