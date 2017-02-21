@@ -112,7 +112,7 @@ input:focus, textarea:focus {
 }
 
 #single-post-header h1 {
-  font-weight: 400;
+  font-weight: 500;
 }
 
 #single-post-header p {
@@ -123,7 +123,7 @@ input:focus, textarea:focus {
   background-color: white;
   border-radius: 10px;
   margin: 10px 0;
-  padding: 20px 25px;
+  padding: 25px 25px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -156,17 +156,38 @@ input:focus, textarea:focus {
 
 #comment-reply-container {
   background-color: #EAF0F6;
-  padding: 30px 20px;
-  margin: 5px 0;
+  display: flex;
+  flex-direction: column;
   width: 90%;
+  padding: 20px 25px;
+  margin: 5px 0;
+  position: relative;
+  right: 0px;
   align-self: flex-end;
-  right: 5%;
   border: #C2CBD7 1px solid;
   border-radius: 5px;
 }
 
 #comment-reply-container p {
   margin: 0;
+}
+
+#reply-form-container {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+#reply-container-icons {
+  display: flex;
+  margin-top: 10px;
+}
+
+#reply-likes {
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  right: 25px;
 }
 
 
@@ -249,6 +270,24 @@ input:focus, textarea:focus {
   transform: translateY(-2px);
 }
 
+.outline-btn {
+  background-color: transparent;
+  color: #507AFF;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: 0.75px;
+  border: #507AFF 1px solid;
+  border-radius: 5px;
+  padding: 12px 20px;
+  cursor: pointer;
+  transition: .25s;
+}
+
+.outline-btn:hover {
+  background-color: #507AFF;
+  color: white;
+}
+
 .secondary-btn {
   font-family: 'Montserrat', sans-serif;
   font-size: 12px;
@@ -283,4 +322,19 @@ input:focus, textarea:focus {
 .post-desc {
   font-size: 16px;
   line-height: 1.5;
+}
+
+.reply-btn {
+  text-align: right;
+  margin: 5px 0;
+}
+
+.new-reply-form {
+  display: none;
+}
+
+.new-reply-form textarea {
+  width: 100%;
+  height: 110px;
+  margin-bottom: 10px;
 }

@@ -60,6 +60,7 @@ controller.show = (req, res) => {
     Comments
     .findAllByPostId(req.params.post_id)
     .then((data) => {
+      console.log(data[0].replies);
       comment_data = data;
       cb();
     });
@@ -101,10 +102,18 @@ controller.createComment = (req, res) => {
 
 controller.commentVotes = (req, res) => {
   Comments
-  .votes(req.params.cmmnt_id)
+  .commentVotes(req.params.cmmnt_id)
   .then(() => {
     res.redirect(`/all/${req.params.post_id}`);
   })
+}
+
+controller.createReply = (req, res) => {
+  Comments
+  .addReply(req.body.replies, req.params.cmmnt_id)
+  .then(() => {
+    res.redirect(`/all/${req.params.post_id}`);
+  });
 }
 
 controller.replyVotes = (req, res) => {

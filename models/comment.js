@@ -11,7 +11,7 @@ Comments.findAllByPostId = (id) => {
       'reply_content', reply_content,
       'reply_votes', reply_votes,
       'reply_username', reply_username
-    )ORDER BY reply_votes DESC) AS replies
+    ) ORDER BY reply_votes DESC) AS replies
     FROM comments
     LEFT OUTER JOIN posts
     ON comments.id = posts.id
@@ -33,13 +33,23 @@ Comments.createComment = (data, id) => {
   );
 }
 
-Comments.votes = (id) => {
+Comments.commentVotes = (id) => {
   return database.query('UPDATE comments SET votes = votes + 1 WHERE id = $1', [id]);
 }
 
-Comments.replies = (id) => {
-  return database.query('SELECT * FROM comment_replies WHERE comment_id = $1', [id]);
+Comments.addReply = (data, id) => {
+  return database.query(
+    `INSERT INTO comment_replies
+    (reply_content, comment_id)
+    VALUES
+    ($1, $2)`,
+    [data.reply_content, id]
+  );
 }
+
+// Comments.commentReplies = (id) => {
+//   return database.query('SELECT * FROM comment_replies WHERE comment_id = $1', [id]);
+// }
 
 Comments.replyVotes = (id) => {
   return database.query('UPDATE comment_replies SET reply_votes = reply_votes + 1 WHERE reply_id = $1', [id]);

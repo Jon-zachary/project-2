@@ -57,16 +57,25 @@
                 </span>
               </div>
             </div>
+
+            <div id="reply-form-container">
+              <button class="secondary-btn reply-btn" type="button">Reply to Comment</button>
+              <form class="new-reply-form" action="/all/<%= post.id %>/<%= comment.id %>/comment-reply %>" method="POST">
+                <textarea name="replies[reply_content]"></textarea>
+                <button class="outline-btn" type="submit" style="margin-bottom: 10px;">Submit Reply</button>
+              </form>
+            </div>
+
             <% comment.replies.forEach((reply) => { %>
               <% if(reply.reply_content !== null) { %>
                 <div id="comment-reply-container">
-                  <span>
+                  <span id="reply-meta">
                     <p><%= reply.reply_content %></p>
-                    <p id="username-tag">by — <strong><%= reply.reply_username %></strong></p>
                   </span>
-                  <span>
+                  <span id="reply-container-icons">
+                    <p id="username-tag">by — <strong><%= reply.reply_username %></strong></p>
                     <form action="/all/<%= post.id %>/<%= comment.id %>/<%= reply.reply_id %>?_method=PUT" method="POST">
-                      <span style="display: flex; align-items: baseline;">
+                      <span id="reply-likes">
                         <button class="like-btn" type="submit"><i class="fa fa-heart"></i></button>
                         <p><%= reply.reply_votes %></p>
                       </span>
