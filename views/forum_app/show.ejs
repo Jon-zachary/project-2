@@ -4,42 +4,81 @@
     <meta charset="utf-8">
     <title><%= post.title %></title>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,400i,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://use.fontawesome.com/301ad5888d.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+
   </head>
   <body>
-    <div id="container">
-      <header>
-        <a href="/all">
-          <button class="standard-btn">Back to Homepage</button>
-        </a>
-        <h1><%= post.title %></h1>
-        <p><%= post.content %></p>
-      </header>
-        <hr>
-      <section>
-        <form action="/all/<%= post.id %>" method="POST">
-          <textarea name="comments[content]" rows="6" cols="60"></textarea><br>
-          <button class="standard-btn" type="submit">Submit Comment</button>
-        </form>
 
-        <hr>
-
-        <% comments.forEach((comment) => { %>
-        <div id="comment-container">
-          <span id="comment-content">
-            <p><%= comment.content %></p>
-            <p id="username-tag">by — <strong><%= comment.username %></strong></p>
-          </span>
-          <span id="comment-container-icons">
-            <form action="/all/<%= post.id %>/<%= comment.id %>?_method=PUT" method="POST">
-                <button type="submit">Like</button>
+    <div id="overlay">
+      <div id="new-content-container">
+        <div id="new-content-form">
+          <h1>Reply to "<%= post.title %>"</h1>
+          <section style="margin-top: 20px;">
+            <form id="post-reply-form" action="/all/<%= post.id %>" method="POST">
+              <textarea name="comments[content]" rows="13" cols="80"></textarea><br>
+              <button class="standard-btn" type="submit">Submit Comment</button>
+              <button id="close-modal" type="button" class="secondary-btn">Cancel</button>
             </form>
-            <p>Likes <%= comment.votes %></p>
-          </span>
+          </section>
         </div>
+      </div>
+    </div>
+
+    <div id="container">
+      <a href="/all">
+        <button class="secondary-btn" id="view-all">View All Posts</button>
+      </a>
+      <header id="single-post-header">
+        <h1><%= post.title %></h1>
+        <p class="post-desc"><%= post.content %></p>
+      </header>
+      <button class="standard-btn" id="post-reply">Reply to Post</button>
+      <section style="margin-top: 35px;">
+        <% comments.forEach((comment) => { %>
+          <div style="display: flex; flex-direction: column;">
+            <div id="comment-container">
+              <span id="comment-content">
+                <p><%= comment.content %></p>
+              </span>
+              <div id="comment-meta">
+                <p id="username-tag">by — <strong><%= comment.username %></strong></p>
+                <span id="comment-container-icons">
+                  <form action="/all/<%= post.id %>/<%= comment.id %>?_method=PUT" method="POST">
+                    <span style="display: flex; align-items: baseline;">
+                      <button class="like-btn" type="submit"><i class="fa fa-heart"></i></button>
+                      <p><%= comment.votes %></p>
+                    </span>
+                  </form>
+                </span>
+              </div>
+            </div>
+            <% comment.replies.forEach((reply) => { %>
+              <% if(reply.reply_content !== null) { %>
+                <div id="comment-reply-container">
+                  <span>
+                    <p><%= reply.reply_content %></p>
+                    <p id="username-tag">by — <strong><%= reply.reply_username %></strong></p>
+                  </span>
+                  <span>
+                    <form action="/all/<%= post.id %>/<%= comment.id %>/<%= reply.reply_id %>?_method=PUT" method="POST">
+                      <span style="display: flex; align-items: baseline;">
+                        <button class="like-btn" type="submit"><i class="fa fa-heart"></i></button>
+                        <p><%= reply.reply_votes %></p>
+                      </span>
+                    </form>
+                  </span>
+                </div>
+              <% } else { return false } %>
+            <% }) %>
+          </div>
         <% }) %>
       </section>
     </div>
+
   </body>
 </html>

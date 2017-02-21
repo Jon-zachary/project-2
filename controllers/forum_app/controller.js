@@ -45,6 +45,7 @@ controller.show = (req, res) => {
 
   let post_data;
   let comment_data;
+  let comment_replies_data;
 
   const getPost = (cb) => {
     Post
@@ -67,7 +68,7 @@ controller.show = (req, res) => {
   async.parallel([getPost, getComments], () => {
     res.render('forum_app/show.ejs', {
       post: post_data[0],
-      comments: comment_data
+      comments: comment_data,
     });
   });
 }
@@ -76,7 +77,6 @@ controller.create = (req, res) => {
   Post
   .createPost(req.body.posts)
   .then((data) => {
-    console.log(req.body.posts.id)
     res.redirect(`/all`);
   })
 }
@@ -102,6 +102,14 @@ controller.createComment = (req, res) => {
 controller.commentVotes = (req, res) => {
   Comments
   .votes(req.params.cmmnt_id)
+  .then(() => {
+    res.redirect(`/all/${req.params.post_id}`);
+  })
+}
+
+controller.replyVotes = (req, res) => {
+  Comments
+  .replyVotes(req.params.reply_id)
   .then(() => {
     res.redirect(`/all/${req.params.post_id}`);
   })

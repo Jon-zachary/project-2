@@ -4,18 +4,40 @@
     <meta charset="utf-8">
     <title>Project 2</title>
     <link href="https://fonts.googleapis.com/css?family=Lato:100,300,400,400i,700,900" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700,900" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://use.fontawesome.com/301ad5888d.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/app.js"></script>
+
   </head>
   <body>
+
+    <div id="overlay">
+      <div id="new-content-container">
+        <div id="new-content-form">
+          <h1>Create a New Post</h1>
+          <section style="margin-top: 20px;">
+            <form id="new-post-form" action="/all" method="POST">
+              <label for="posts[title]"><h3>Post Title</h3></label>
+              <input type="text" name="posts[title]">
+              <label for="posts[content]"><h3>Post Content</h3></label>
+              <textarea name="posts[content]" rows="8" cols="80"></textarea>
+              <button id="submit-new-post" class="standard-btn" type="submit">Create Post</button>
+              <button id="close-modal" class="secondary-btn" type="button">Cancel</button>
+            </form>
+          </section>
+        </div>
+      </div>
+    </div>
+
     <div id="container">
       <header id="header-container">
         <span>
-          <h1>Forums Title Goes Here</h1>
+          <h1>Message Boards</h1>
         </span>
-        <a href="/all/new">
-          <button class="standard-btn">Create New Thread</button>
-        </a>
+          <button class="standard-btn" id="create-thread">Create New Post</button>
       </header>
       <section>
         <% posts.forEach((post) => { %>
@@ -23,16 +45,21 @@
             <a href="/all/<%= post.id %>">
               <h2><%= post.title %></h2>
             </a>
-            <div id="post-container-icons">
-              <span>Comments: <%= post.comments_num %></span>
-              <form action="/all/<%= post.id %>/post-votes?_method=PUT" method="POST">
-                <!-- <input type="submit" value="Like"> -->
-                <span><button class="like-btn" type="submit"></button><%= post.votes %></span>
-              </form>
+            <div id="post-meta">
+              <p id="username-tag">by – <strong><%= post.post_author %></strong></p>
+              <div id="post-container-icons">
+                <span style="margin-right: 10px; color:#BFC4D4;"><i class="fa fa-comment"></i></span>
+                <span style="margin-right: 10px;"><%= post.comments_num %></span>
+                <form action="/all/<%= post.id %>/post-votes?_method=PUT" method="POST">
+                  <span><button class="like-btn" type="submit"><i class="fa fa-heart"></i></button></span>
+                  <span><%= post.votes %></span>
+                </form>
+              </div>
             </div>
           </div>
         <% }) %>
       </section>
     </div>
+
   </body>
 </html>
