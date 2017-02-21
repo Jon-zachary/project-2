@@ -113,6 +113,8 @@ input:focus, textarea:focus {
 
 #single-post-header h1 {
   font-weight: 500;
+  max-width: 700px;
+  line-height: 1.5;
 }
 
 #single-post-header p {

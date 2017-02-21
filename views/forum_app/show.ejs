@@ -69,7 +69,7 @@
             <% comment.replies.forEach((reply) => { %>
               <% if(reply.reply_content !== null) { %>
                 <div id="comment-reply-container">
-                  <span id="reply-meta">
+                  <span style="max-width: 750px;">
                     <p><%= reply.reply_content %></p>
                   </span>
                   <span id="reply-container-icons">

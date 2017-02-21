@@ -31,7 +31,6 @@ $(document).ready(() => {
   });
 
   $('.reply-btn').on('click', function(e) {
-    // $('.new-reply-form').css('display', 'inline-block');
     e.preventDefault();
     $(this).next('.new-reply-form').show();
 

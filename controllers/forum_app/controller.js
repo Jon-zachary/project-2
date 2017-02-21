@@ -25,24 +25,6 @@ controller.new = (req, res) => {
 }
 
 controller.show = (req, res) => {
-  // Thread
-  // .findThreadById(req.params.id)
-  // .then((threads) => {
-  //   Comments
-  //   .findAllByThreadId(req.params.id)
-  //   .then((comments) => {
-  //     res.render('forum_app/show.ejs', {
-  //       thread: threads[0],
-  //       comments: comments
-  //     });
-  //   })
-  // })
-  // .catch((err) => {
-  //   res
-  //   .status(400)
-  //   .send(err);
-  // });
-
   let post_data;
   let comment_data;
   let comment_replies_data;
@@ -51,7 +33,7 @@ controller.show = (req, res) => {
     Post
     .findPostById(req.params.post_id)
     .then((data) => {
-      post_data = data;
+      post_data = (data);
       cb();
     });
   }
@@ -60,7 +42,6 @@ controller.show = (req, res) => {
     Comments
     .findAllByPostId(req.params.post_id)
     .then((data) => {
-      console.log(data[0].replies);
       comment_data = data;
       cb();
     });
