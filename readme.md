@@ -8,6 +8,18 @@ Wireframes
 ![new post](http://i.imgur.com/iv6Qj3c.png)  
 ![show](http://i.imgur.com/uJngUq2.png)
 
+User Stories
+------------
+* As a user I should be able to see all available posts
+* As a user I should be able to create a new post
+* As a user I should be able to 'like' a post
+* As a user I should be able to see all comments within a post
+* As a user I should be able to comment on a specific post
+* As a user I should be able to 'like' a comment or comments
+* As a user I should be able to reply to a comment and see replies from other users
+* As a user I shoudld be able to 'like' a reply
+
+
 ERD
 ---
 ![ERD](http://i.imgur.com/jQzZ33C.png)
